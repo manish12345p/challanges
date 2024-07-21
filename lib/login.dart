@@ -1,7 +1,11 @@
 import 'package:challanges/rootpage.dart';
 import 'package:challanges/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 //import'Login_signin.dart';
+
+
+//ATOM ONE DARK THEME
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -14,6 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   
   var passtext=TextEditingController();
   var emailtext=TextEditingController();
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,11 +89,15 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(height:12,),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 85.0),
-                        child: ElevatedButton(onPressed:() {
+                        child: ElevatedButton(onPressed:()async {
+                          SharedPreferences prefs=await SharedPreferences.getInstance();
+                          prefs.setBool('islogged', true);
+                        
                           String uEmail= emailtext.text.toString();
                           String uPass= passtext.text;
                           // ignore: avoid_print
-                          print('Email:$uEmail,Passward:$uPass');
+                          print('Email:$uEmail,Passward:$uPass ${prefs.getBool('islogged')}');
+                          // ignore: use_build_context_synchronously
                           Navigator.push(context, MaterialPageRoute(builder: (context){
                          return const RootPage();
                          }));}, 

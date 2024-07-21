@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeTab extends StatefulWidget {
@@ -16,6 +17,14 @@ class _HomeTabState extends State<HomeTab> {
   LinearGradient? backgroundColor;
 
   @override
+  // double initial=0.0;
+  // void update(){
+  //   Timer.periodic(const Duration(milliseconds: 100), (timer) {
+  //     setState(() {
+  //       initial=initial + 0.05;
+  //     });
+  //    });
+  // }
   void initState() {
     super.initState();
     backgroundColor = lightTheme;
@@ -42,7 +51,12 @@ class _HomeTabState extends State<HomeTab> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 90),
+              const SizedBox(
+                height: 42,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -55,17 +69,14 @@ class _HomeTabState extends State<HomeTab> {
                   ),
                   GestureDetector(
                     onTap: changeTheme,
-                    child: const Text(
-                      '🌙',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: const Icon(
+                      Icons.brightness_4_rounded,
+                      size: 30,
                     ),
                   ),
                 ],
               ),
-              const CategoryWidget(),
+              CategoryWidget(),
               const ProductivityWidget(),
             ],
           ),
@@ -75,11 +86,13 @@ class _HomeTabState extends State<HomeTab> {
   }
 }
 
+// ignore: must_be_immutable
 class CategoryWidget extends StatelessWidget {
-  const CategoryWidget({
+  CategoryWidget({
     super.key,
   });
 
+  int? _sliding = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -90,53 +103,20 @@ class CategoryWidget extends StatelessWidget {
             height: 35,
             width: double.maxFinite,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(10),
                 color: const Color.fromARGB(255, 190, 185, 185)),
-            child: Row(
-              children: [
-                const SizedBox(
-                  width: 3,
-                ),
-                Container(
-                  height: 30,
-                  width: 105,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.white,
-                  ),
-                  child: const Center(
-                      child: Text('All',
-                          style: TextStyle(fontWeight: FontWeight.bold))),
-                ),
-                const SizedBox(
-                  width: 3,
-                ),
-                Container(
-                  height: 30,
-                  width: 105,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.white,
-                  ),
-                  child: const Center(
-                      child: Text('Male',
-                          style: TextStyle(fontWeight: FontWeight.bold))),
-                ),
-                const SizedBox(
-                  width: 3,
-                ),
-                Container(
-                  height: 30,
-                  width: 105,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.white,
-                  ),
-                  child: const Center(
-                      child: Text('Fem',
-                          style: TextStyle(fontWeight: FontWeight.bold))),
-                ),
-              ],
+            child: CupertinoSlidingSegmentedControl(
+              children:  const {
+                0: Text('All'),
+                1: Text('male'),
+                2: Text('Female'),
+              },
+              groupValue: _sliding,
+              onValueChanged: (int? newValue) {
+                // setState(() {
+                  _sliding = newValue;
+                // });
+              },
             ),
           ),
         ),
@@ -144,12 +124,14 @@ class CategoryWidget extends StatelessWidget {
           height: 45,
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
               height: 150,
               width: 150,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
+                border: Border.all(width: 3, color: Colors.purple),
                 gradient: const LinearGradient(
                   colors: [Color(0xfffbc2eb), Color(0xffa6c1ee)],
                 ),
@@ -163,14 +145,12 @@ class CategoryWidget extends StatelessWidget {
                 ),
               )),
             ),
-            const SizedBox(
-              width: 28,
-            ),
             Container(
               height: 150,
               width: 150,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
+                border: Border.all(width: 3, color: Colors.orangeAccent),
                 gradient: const LinearGradient(
                   colors: [Color(0xfffccb90), Color(0xffd57eeb)],
                 ),
@@ -190,12 +170,14 @@ class CategoryWidget extends StatelessWidget {
           height: 45,
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
               height: 150,
               width: 150,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
+                border: Border.all(width: 3, color: Colors.lime),
                 gradient: const LinearGradient(
                   colors: [Color(0xffffecd2), Color(0xfffcb69f)],
                 ),
@@ -209,14 +191,12 @@ class CategoryWidget extends StatelessWidget {
                 ),
               )),
             ),
-            const SizedBox(
-              width: 28,
-            ),
             Container(
               height: 150,
               width: 150,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
+                border: Border.all(width: 3, color: Colors.blueGrey),
                 gradient: const LinearGradient(
                   colors: [Color(0xfffdfbfb), Color(0xffebedee)],
                 ),
@@ -238,6 +218,7 @@ class CategoryWidget extends StatelessWidget {
       ],
     );
   }
+
 }
 
 class ProductivityWidget extends StatelessWidget {
@@ -250,6 +231,7 @@ class ProductivityWidget extends StatelessWidget {
     return Column(
       children: [
         const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               'PRODUCTIVITY',
@@ -257,9 +239,6 @@ class ProductivityWidget extends StatelessWidget {
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
-            ),
-            SizedBox(
-              width: 132.49,
             ),
             Text(
               'More ->',
@@ -275,12 +254,12 @@ class ProductivityWidget extends StatelessWidget {
         ),
         Container(
           height: 75,
-          width: 328,
+          width: double.maxFinite,
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-                colors: [Color(0xfffdfbfb), Color(0xffebedee)]),
-            borderRadius: BorderRadius.circular(15),
-          ),
+              gradient: const LinearGradient(
+                  colors: [Color(0xfffdfbfb), Color(0xffebedee)]),
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(width: 3, color: Colors.grey)),
           child: Row(
             children: [
               const SizedBox(
@@ -290,10 +269,10 @@ class ProductivityWidget extends StatelessWidget {
                 height: 55,
                 width: 55,
                 decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                      colors: [Color(0xff93a5cf), Color(0xffe4efe9)]),
-                  borderRadius: BorderRadius.circular(7),
-                ),
+                    gradient: const LinearGradient(
+                        colors: [Color(0xff93a5cf), Color(0xffe4efe9)]),
+                    borderRadius: BorderRadius.circular(7),
+                    border: Border.all(color: Colors.blue)),
                 child: Center(
                   child: Text(
                     '△',
@@ -338,6 +317,9 @@ class ProductivityWidget extends StatelessWidget {
             ],
           ),
         ),
+        const SizedBox(
+          height: 3,
+        )
       ],
     );
   }

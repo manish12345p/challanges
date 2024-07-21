@@ -1,8 +1,8 @@
+import 'package:challanges/Youtab.dart';
 import 'package:challanges/booktab.dart';
 import 'package:challanges/hometab.dart';
-import 'package:challanges/imagetab.dart';
-import 'package:challanges/messagetab.dart';
-import 'package:challanges/pietab.dart';
+import 'package:challanges/notificationtab.dart';
+import 'package:challanges/profiletab.dart';
 import 'package:flutter/material.dart';
 
 class RootPage extends StatefulWidget {
@@ -32,12 +32,12 @@ class _RootPageState extends State<RootPage> {
       selectedTab = const Booksec();
     }
      else if (selectedTabIndex == 2) {
-      selectedTab = const MessageTab() ;
+      selectedTab = const YouTab() ;
     }
      else if (selectedTabIndex == 3) {
-      selectedTab = const PieTab();
+      selectedTab = const ProfileTab();
     } else if (selectedTabIndex == 4) {
-      selectedTab = const ImageTab();
+      selectedTab = const NotificationTab();
     }
   }
 
@@ -58,20 +58,20 @@ class _RootPageState extends State<RootPage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.book),
+            icon: Icon(Icons.auto_stories_rounded),
             label: 'Book',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'Message',
+            icon: Icon(Icons.account_circle_rounded),
+            label: 'You',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.pie_chart),
-            label: 'Chart',
+            icon: Icon(Icons.auto_awesome_motion_rounded),
+            label: 'Profiles',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.image),
-            label: 'Image',
+            icon: Icon(Icons.auto_awesome_outlined),
+            label: 'notification',
           ),
         ],
       ),
