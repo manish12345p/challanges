@@ -1,18 +1,25 @@
 import 'package:challanges/rootpage.dart';
-import 'package:challanges/signin.dart';
+import 'package:challanges/signup.dart';
 import 'package:flutter/material.dart';
 //import'Login_signin.dart';
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  double initial=0.0;
+  
+  var passtext=TextEditingController();
+  var emailtext=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body:Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(colors: [
-            Color(0xff434343),Color(0xff0000)
-          ]),
+          image: DecorationImage(image: AssetImage('assets/images/game6.jpg'),fit: BoxFit.cover,)
         ),
         width: MediaQuery.of(context).size.width,
         child: Padding(
@@ -26,11 +33,19 @@ class LoginPage extends StatelessWidget {
                   width: double.maxFinite,
                   decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
-                  color: Colors.white,),
+                  color: Colors.white.withOpacity(0.9),),
                   child:Padding(padding: const EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Center(
+                        child: Container(
+                          height: 10,
+                          width: 70,
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.grey),
+                          child: LinearProgressIndicator(borderRadius: BorderRadius.circular(10),backgroundColor: Colors.grey,color: Colors.indigo,value: initial,),
+                        ),
+                      ),
                       const Text('Welcome Gamers',style: TextStyle(
                         fontSize: 18,
                         fontWeight:FontWeight.bold ,
@@ -38,15 +53,29 @@ class LoginPage extends StatelessWidget {
                       const Text('gaming news for you!'),
                       const SizedBox(height:60,),
                       TextFormField(
+                        onTap: () {
+                          initial=initial+0.5;
+                        },
+                       controller: emailtext,
+                       showCursor: false,
                        decoration: const InputDecoration(
-                       labelText: 'Email',
+                       hintText: 'Email',
+                       border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(30)),),
                        prefixIcon:Icon(Icons.email),
                        ),
                       ),
                       const SizedBox(height:25),
                       TextFormField(
+                        onTap: () {
+                          initial=initial+0.5;
+                        },
+                       controller:passtext ,
+                       obscureText: true,
+                       obscuringCharacter: '*',
+                       showCursor: false,
                        decoration: const InputDecoration(
-                       labelText: 'Password',
+                       hintText: 'Passward',
+                       border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(30))),
                        prefixIcon:Icon(Icons.key),
                        ),
                       ),
@@ -55,7 +84,12 @@ class LoginPage extends StatelessWidget {
                       const SizedBox(height:12,),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 85.0),
-                        child: ElevatedButton(onPressed:() {Navigator.push(context, MaterialPageRoute(builder: (context){
+                        child: ElevatedButton(onPressed:() {
+                          String uEmail= emailtext.text.toString();
+                          String uPass= passtext.text;
+                          // ignore: avoid_print
+                          print('Email:$uEmail,Passward:$uPass');
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
                          return const RootPage();
                          }));}, 
                            style: ElevatedButton.styleFrom(

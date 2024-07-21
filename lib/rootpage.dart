@@ -1,4 +1,8 @@
+import 'package:challanges/booktab.dart';
 import 'package:challanges/hometab.dart';
+import 'package:challanges/imagetab.dart';
+import 'package:challanges/messagetab.dart';
+import 'package:challanges/pietab.dart';
 import 'package:flutter/material.dart';
 
 class RootPage extends StatefulWidget {
@@ -25,19 +29,15 @@ class _RootPageState extends State<RootPage> {
       selectedTab = const HomeTab();
     } 
     else if (selectedTabIndex == 1) {
-      selectedTab = Container(
-        color: Colors.grey,
-      );
+      selectedTab = const Booksec();
     }
      else if (selectedTabIndex == 2) {
-      selectedTab = Container(
-        color: Colors.purple,
-      );
+      selectedTab = const MessageTab() ;
     }
      else if (selectedTabIndex == 3) {
-      selectedTab = Container();
+      selectedTab = const PieTab();
     } else if (selectedTabIndex == 4) {
-      selectedTab = const HomeTab();
+      selectedTab = const ImageTab();
     }
   }
 

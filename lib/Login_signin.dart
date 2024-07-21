@@ -13,9 +13,9 @@ class _SLPageState extends State<SLPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(colors: [
-            Color(0xff434343),Color(0xff0000)
+           Color(0xffe6e9f0), Color(0xffeef1f5)
           ]),
         ),
         width: MediaQuery.of(context).size.width,
@@ -24,8 +24,8 @@ class _SLPageState extends State<SLPage> {
           child: SingleChildScrollView(
             child: Column(
               children:[
-                SizedBox(height:90,),
-                Container(
+                const SizedBox(height:90,),
+                const SizedBox(
                   height: 100,
                   width:100,
                   child: Icon(
@@ -33,31 +33,31 @@ class _SLPageState extends State<SLPage> {
                     color:Colors.lightBlue,
                     Icons.padding),
                 ),
-                SizedBox(height: 100,),
-                Text('Gaming News\n\t\t\t\there it is,',style: TextStyle(fontSize:24,color: Colors.lightBlueAccent, fontWeight: FontWeight.bold),),
-                SizedBox(height: 150,),
+                const SizedBox(height: 100,),
+                const Text('Gaming News\n\t\t\t\there it is,',style: TextStyle(fontSize:24,color: Colors.lightBlueAccent, fontWeight: FontWeight.bold),),
+                const SizedBox(height: 150,),
                 ElevatedButton(onPressed:() {Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return SignUp();
-                }));},
-                 child:Text('Sign Up',style: TextStyle(color:Colors.white,
-                 fontSize: 19) ,), 
+                  return const SignUp();
+                }));}, 
                  style: ElevatedButton.styleFrom(
-                  minimumSize: Size(170,60),
+                  minimumSize: const Size(170,60),
                   backgroundColor: Colors.lightBlue,
                  ),
+                 child:const Text('Sign Up',style: TextStyle(color:Colors.white,
+                 fontSize: 19) ,),
                  ),
-                SizedBox(height: 15,),
+                const SizedBox(height: 15,),
                 ElevatedButton(onPressed:() {Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return LoginPage();
-                }));},
-                 child:Text('Login',style: TextStyle(color:Colors.white,
-                 fontSize: 19) ,), 
+                  return const LoginPage();
+                }));}, 
                  style: ElevatedButton.styleFrom(
-                  minimumSize: Size(170,60),
+                  minimumSize: const Size(170,60),
                   backgroundColor: Colors.lightBlue,
                  ),
+                 child:const Text('Login',style: TextStyle(color:Colors.white,
+                 fontSize: 19) ,),
                  ),
-                 SizedBox(height:125,),
+                 const SizedBox(height:125,),
               ],
             ),
           ),
